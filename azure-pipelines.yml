@@ -14,9 +14,9 @@ pool:
 jobs:
 - job: job1
   variables:
-    JAVA_HOME: /usr/bin/java
+    JAVA_HOME_8_X64: /usr/bin/java
   steps:
-  - bash: echo $(JAVA_HOME)
+  - bash: echo $(JAVA_HOME_8_X64)
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
