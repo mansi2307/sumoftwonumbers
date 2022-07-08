@@ -14,16 +14,15 @@ pool:
 steps:
 - task: JavaToolInstaller@0
   inputs:
-    #versionSpec: '8' 
-    jdkArchitectureOption: # Options: x64, x86
-    jdkSourceOption: # Options: AzureStorage, LocalDirectory
-    #jdkFile: # Required when jdkSourceOption == LocalDirectory
-    #azureResourceManagerEndpoint: # Required when jdkSourceOption == AzureStorage
-    #azureStorageAccountName: # Required when jdkSourceOption == AzureStorage
-    #azureContainerName: # Required when jdkSourceOption == AzureStorage
-    #azureCommonVirtualFile: # Required when jdkSourceOption == AzureStorage
-    jdkDestinationDirectory: 
-    #cleanDestinationDirectory: true
+    versionSpec: '6'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: AzureStorage
+    azureResourceManagerEndpoint: myARMServiceConnection
+    azureStorageAccountName: myAzureStorageAccountName
+    azureContainerName: myAzureStorageContainerName
+    azureCommonVirtualFile: 'jdk1.6.0_45.zip'
+    jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk6'
+    cleanDestinationDirectory: false
 
 - task: Maven@3
   inputs:
