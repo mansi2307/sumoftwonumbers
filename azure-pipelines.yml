@@ -11,26 +11,19 @@ pool:
   demands:
   - Agent.Name -equals MacOS-agent
   
-steps:
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '6'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: AzureStorage
-    azureResourceManagerEndpoint: myARMServiceConnection
-    azureStorageAccountName: myAzureStorageAccountName
-    azureContainerName: myAzureStorageContainerName
-    azureCommonVirtualFile: 'jdk1.6.0_45.zip'
-    jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk6'
-    cleanDestinationDirectory: false
-
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+jobs:
+- job: job1
+  variables:
+    JAVA_HOME: /usr/bin/java
+  steps:
+  - bash: echo $(JAVA_HOME)
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'package'
